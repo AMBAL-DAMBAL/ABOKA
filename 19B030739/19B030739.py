@@ -496,15 +496,7 @@ class Player(pg.sprite.Sprite):
                 bullet = Bullet(self.rect.center, self.fire_direction)
                 self.bullets.add(bullet)
                 self.all_sprites.add(bullet)
-        elif event.type == pg.KEYUP:
-            if event.key == self.key_left and self.vel.x < 0:
-                self.vel.x = 0
-            elif event.key == self.key_right and self.vel.x > 0:
-                self.vel.x = 0
-            elif event.key == self.key_up and self.vel.y < 0:
-                self.vel.y = 0
-            elif event.key == self.key_down and self.vel.y > 0:
-                self.vel.y = 0
+         
 
 
 class Bullet(pg.sprite.Sprite):
@@ -558,6 +550,22 @@ class Game:
             self.all_sprites, self.bullets2, self.bullets1)   
         self.all_sprites.add(player1, player2)
         self.players = pg.sprite.Group(player1, player2)
+        
+        
+     def main_menu(self):
+        while not self.donemenu:
+            self.handle_events_menu()
+            self.dt = self.clock.tick(self.fps) / 1000
+            single = font.render('Single Player: press s' , True, (255, 123, 100))
+            multi = font.render('Multiplayer: press m', True, (255, 125, 100))
+             
+
+            self.screen.fill(self.bg_color)
+
+            self.screen.blit(multi, ((250, 150), (250, 150)))
+            self.screen.blit(single, ((250, 100), (250, 100)))
+             
+            pg.display.flip()
 
     def run(self):
         while not self.done:
